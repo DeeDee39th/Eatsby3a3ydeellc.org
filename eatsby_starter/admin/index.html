@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Admin • Eats By 3a3y Dee</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:1000px;margin:0 auto;padding:24px;line-height:1.5}
+    section{margin-block:24px}
+    form{display:grid;gap:12px;max-width:720px}
+    .row{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+    label{display:grid;gap:6px}
+    input,textarea,select{padding:10px;border:1px solid #ccc;border-radius:6px}
+    small.note{opacity:.7}
+  </style>
+</head>
+<body>
+  <h1>Admin Dashboard (Private)</h1>
+  <p class="note">Protect this site via Netlify → Site settings → Site protection → Password.</p>
+
+  <section>
+    <h2>Create a New Job</h2>
+    <form name="admin-create-job" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="admin-create-job">
+      <div class="row">
+        <label>Title <input name="title" required></label>
+        <label>Date/Time <input type="datetime-local" name="start" required></label>
+      </div>
+      <div class="row">
+        <label>Location <input name="location" required></label>
+        <label>Pay (flat or/hr) <input name="pay" required></label>
+      </div>
+      <label>Notes <textarea name="notes" rows="4"></textarea></label>
+      <button type="submit">Save (emails you a copy)</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Employee Document Upload</h2>
+    <form name="employee-verify" method="POST" data-netlify="true" enctype="multipart/form-data">
+      <input type="hidden" name="form-name" value="employee-verify">
+      <div class="row">
+        <label>Employee Name <input name="emp_name" required></label>
+        <label>Email <input type="email" name="emp_email" required></label>
+      </div>
+      <label>Government ID (front) <input type="file" name="id_front" accept="image/*,application/pdf" required></label>
+      <label>Government ID (back) <input type="file" name="id_back" accept="image/*,application/pdf"></label>
+      <div class="row">
+        <label>Payment method
+          <select name="pay_method" required>
+            <option value="zelle">Zelle</option>
+            <option value="paypal">PayPal</option>
+            <option value="applepay">Apple Pay</option>
+            <option value="check">Check</option>
+          </select>
+        </label>
+        <label>Payment details (email/phone etc.) <input name="pay_details" required></label>
+      </div>
+      <button type="submit">Upload</button>
+    </form>
+    <p class="note">For long-term storage, we can connect to Airtable/Google Drive later.</p>
+  </section>
+</body>
+</html>
